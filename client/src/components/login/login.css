@@ -1,4 +1,4 @@
-.Container  {
+.container  {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   background-color: #f0f2f5;
 }
 
-.LoginForm {
+.loginForm {
   background: white;
   padding: 2rem;
   border-radius: 8px;

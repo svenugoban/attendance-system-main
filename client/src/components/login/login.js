@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import "./login.css";
 import axios from "axios";
 import { AuthContext } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
       // Save the token and update the authentication state
       login(response.data.token);
       // Redirect or update the UI accordingly
+      navigate("/home");
     } catch (err) {
       console.error("Login failed:", err);
       setError("Invalid username or password");
@@ -31,8 +34,8 @@ const Login = () => {
   };
 
   return (
-    <div className="Container">
-      <div className="LoginForm">
+    <div className="container">
+      <div className="loginForm">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <input
