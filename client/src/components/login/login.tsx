@@ -1,6 +1,6 @@
-import React from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import {
   Container,
   CssBaseline,
@@ -13,29 +13,9 @@ import {
   Grid,
   Box,
   Typography,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { makeStyles } from '@mui/styles';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useStyles } from "./login.styles";
 
 const Login = () => {
   const classes = useStyles();
@@ -48,13 +28,17 @@ const Login = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ email: "", password: "" }}
           validationSchema={Yup.object({
-            email: Yup.string().email('Invalid email address').required('Required'),
-            password: Yup.string().min(6, 'Must be at least 6 characters').required('Required'),
+            email: Yup.string()
+              .email("Invalid email address")
+              .required("Required"),
+            password: Yup.string()
+              .min(6, "Must be at least 6 characters")
+              .required("Required"),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -63,7 +47,15 @@ const Login = () => {
             }, 400);
           }}
         >
-          {({ isSubmitting, handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+          {({
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
             <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
@@ -127,12 +119,12 @@ const Login = () => {
       </div>
       <Box mt={8}>
         <Typography variant="body2" color="textSecondary" align="center">
-          {'Copyright © '}
+          {"Copyright © "}
           <Link color="inherit" href="https://mui.com/">
             Your Website
-          </Link>{' '}
+          </Link>{" "}
           {new Date().getFullYear()}
-          {'.'}
+          {"."}
         </Typography>
       </Box>
     </Container>
