@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/login",
+        "api/login",
         { username, password },
         {
           headers: {
@@ -21,7 +21,6 @@ const Login = () => {
           },
         }
       );
-      console.log("Login successful:", response.data);
       // Save the token and update the authentication state
       login(response.data.token);
       // Redirect or update the UI accordingly
