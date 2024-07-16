@@ -2,14 +2,18 @@ import React, { useState, useContext } from "react";
 import "./login.css";
 import axios from "axios";
 import { AuthContext } from "../../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { isLoggedIn, login } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  if (isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
