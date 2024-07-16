@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import Login from "./components/login/login";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider, AuthContext } from "./AuthContext";
 import HomePage from "./components/home/home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <AuthProvider>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<HomePage />} />
-          </Routes>
-        </Router>
-      </div>
-    </AuthProvider>
-  );
-}
+const PrivateRoute = ({ children }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  return isLoggedIn ? children : <Navigate to="/login" />;
+};
+
+const App = () => (
+  <AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/home" />} />
+      </Routes>
+    </Router>
+  </AuthProvider>
+);
 
 export default App;
